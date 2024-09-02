@@ -1,0 +1,6 @@
+## problemas e soluções
+
+semana 1/08 - 08/08
+- começamos a usar o plataformIO
+- testamos no plataformIO o sensor de toque o sensor ultrassonico
+- o negocio de aninha de dar uma porta inexistente na plataformIO atualizamos os drivers e conseguimos acesso as portas! demos um sudo e foi
