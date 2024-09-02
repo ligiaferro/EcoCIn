@@ -3,7 +3,7 @@ const int collisionPin = 21; // Exemplo: GPIO 21
 
 void setup() {
   // Inicialize a comunicação serial para monitorar os eventos
-  Serial.begin(115200);
+  Serial.begin(9600);
   
   // Configure o pino do sensor como entrada
   pinMode(collisionPin, INPUT);
