@@ -18,7 +18,16 @@
 - validamos na rasp camera via USB com um simples script de receber a leitura da camera. funcionou ok tambem!
 - fiz por detecção de objetos usando TensorFlow . funcionou tambem, a rasp esquentou um pouco e ficou um pouco lenta, mas nada fora do esperado.
 
-### 08 de setembro - 14 de setembro 
+### 08 de setembro - 22 de setembro 
+
+- poucos avanços . muita dificuldade na comunicação com LoRa, tentamos de tudo mas tivemos muitos problemas 
+- a lib de matheus usava a LoraMesh na versão desatualizada
+
+### 23 - x de setembro 
+- organizamos o banco de dados com as classes, criamos arquivos csv e treinamos um modelo v0 no roboflow.
+- conseguimos validar a comunicação via esp
+- validamos o sensor de toque comunicação via lora
+
 
 
 
