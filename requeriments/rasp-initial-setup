@@ -1,0 +1,54 @@
+######## configurar a nossa rasp do zero ###################
+#
+# "->" no terminal
+# ---->" para comandos
+#
+###########################################################
+---->versão recomendada: Raspberry Pi OS (Legacy, 64-bit)
+
+-> sudo apt update && sudo apt upgrade 
+-> sudo apt install code
+----> abrir o vscode e desabilita a aceleração de hardware rodando "runtime" e comenta a linha 
+----> abre o chrome e vai em configurações > sistema e desabilita a mesma coisa
+
+# agora vamos baixar o python 3.9.0 e criar o pyenv 
+
+---> cria a pasta do projeto e da um cd nela e roda no terminal:
+
+-> sudo apt-get update
+-> sudo apt-get upgrade
+->curl https://pyenv.run | bash
+->echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+exec "$SHELL"
+->sudo apt-get install --yes libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev lzma lzma-dev tcl-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev wget curl make build-essential openssl
+->pyenv install 3.9.12
+->pyenv local 3.9.12
+->python --version
+#cria o ambiente virtual dentro da pasta do nosso projeto
+-> python3 -m venv .venv
+->source .venv/bin/activate
+
+#instalar todas as bibliotecas necessárias dentro da pasta do nosso projeto . com o ambiente vitual ativado
+
+->sudo nano /etc/dphys-swapfile
+    CONF_SWAPSIZE=2048 (vai editar de 100 ou 200 para 2048) no VIM
+->sudo apt-get update && sudo apt-get upgrade
+->sudo apt-get install python3-pip python3-virtualenv
+->sudo apt install -y build-essential cmake pkg-config libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libfontconfig1-dev libcairo2-dev libgdk-pixbuf2.0-dev libpango1.0-dev libgtk2.0-dev libgtk-3-dev libatlas-base-dev gfortran libhdf5-dev libhdf5-serial-dev libhdf5-103 libqt5gui5 libqt5webkit5 libqt5test5 python3-pyqt5 python3-dev
+->pip install -r requirements.txt (esse arquivo tem q ta no mesmo diretorio)
+->pip install gpiozero rpi-gpio
+
+#agora instalação do tensorflow na Raspberry .. ainda no nosso diretorio no ambiente virtual ATIVADP
+
+->source .venv/bin/activate
+->pip install --upgrade pip
+->pip install h5py --only-binary h5py
+->curl -L https://github.com/PINTO0309/Tensorflow-bin/releases/download/v2.9.0/tensorflow-2.9.0-cp39-none-linux_aarch64.whl -o tensorflow-2.9.0-cp39-none-linux_aarch64.whl
+->pip install tensorflow-2.9.0-cp39-none-linux_aarch64.whl
+->pip install --upgrade protobuf==3.20.0
+
+
+
+
