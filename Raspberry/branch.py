@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 import time
 from collections import Counter
 from id_sender import NumberSender
-from servosporclasse import ServoController
+from restart import ServoController
 
 model = load_model('/home/assb/EcoCIn/ilixo/modelo-v3/keras_model.h5')
 data = np.zeros((1, 224, 224, 3), dtype=np.float32)
@@ -27,16 +27,17 @@ time.sleep(1)
 classes = ['metal', 'nao-reciclavel', 'organico', 'papel', 'plastico', 'vidro']
 
 predictions_window = []
-window_size = 50  # Número de classificações para calcular a moda
+window_size = 20  # Número de classificações para calcular a moda
 
 sender = NumberSender(17, 27, 22)
-servo_pins = [20, 16, 21, 12] 
-controller = ServoController(servo_pins)
+time.sleep(1)
+
+controller = ServoController(19,21,20,12)
+controller.move_servos()
 
 while True:
 
     sender.cleanup_pins()
-    controller.cleanup_pins()
 
     print("Monitorando o sensor de colisão...")
 
@@ -81,25 +82,27 @@ while True:
                 lixo_descartado_da_vez = classes[most_common_class]
                 print(f"Lixo descartado da vez (moda): {lixo_descartado_da_vez}")
 
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-        #logica de mandar para a esp
-    
-        ID_PARA_ESP = int(most_common_class + 1)
 
+        #logica de mandar para a esp
+
+        ID_PARA_ESP = int(most_common_class + 1)
+ 
+        time.sleep(1)
         controller.move_servos()
+        time.sleep(3)
 
         sender.send_number(ID_PARA_ESP)
         print(f"MANDEI ESSA :{most_common_class}")
         time.sleep(1)
-        predictions_window.clear()
 
+        predictions_window.clear()
 
     else:
     
         print("lixeira fechada ....")
-
-        
 
 video.release()
 cv2.destroyAllWindows()
