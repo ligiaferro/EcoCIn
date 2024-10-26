@@ -35,6 +35,8 @@ time.sleep(1)
 controller = ServoController(19,21,20,12)
 controller.move_servos()
 
+flag = 0
+
 while True:
 
     sender.cleanup_pins()
@@ -42,7 +44,7 @@ while True:
     print("Monitorando o sensor de colisão...")
 
     if (GPIO.input(SENSOR_PIN)):
-        while (GPIO.input(SENSOR_PIN)): # abriu tampa
+        while (GPIO.input(SENSOR_PIN) and flag == 0): # abriu tampa
 
             check, img = video.read()
 
@@ -81,6 +83,7 @@ while True:
                 most_common_class = Counter(predictions_window).most_common(1)[0][0]
                 lixo_descartado_da_vez = classes[most_common_class]
                 print(f"Lixo descartado da vez (moda): {lixo_descartado_da_vez}")
+                flag = 1
 
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -92,13 +95,14 @@ while True:
  
         time.sleep(1)
         controller.move_servos()
-        time.sleep(3)
+        time.sleep(1)
 
         sender.send_number(ID_PARA_ESP)
         print(f"MANDEI ESSA :{most_common_class}")
         time.sleep(1)
 
         predictions_window.clear()
+        flag = 0
 
     else:
     
