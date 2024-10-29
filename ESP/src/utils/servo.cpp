@@ -2,6 +2,11 @@
 
 #include <ESP32Servo.h>
 
+//SERVOS:
+//Laranja -> Sinal
+//Vermelho -> VCC
+//Marrom -> GND
+
 // Defina o pino onde o servo está conectado
 const int servoPin = 36;
 
